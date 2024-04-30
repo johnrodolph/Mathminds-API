@@ -15,7 +15,7 @@ public class UserEntity {
 	private String uid;
 
 	@Column(name = "firstname")
-	private String firstName;
+	private String fname;
 
 	@Column(name = "lastname")
 	private String lname;
