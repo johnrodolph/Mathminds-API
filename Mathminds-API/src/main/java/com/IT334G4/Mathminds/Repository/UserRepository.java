@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.IT334G4.Mathminds.Entity.UserEntity;
 
 @Repository
-public interface UserRepository extends JpaRepository<UserEntity,Integer>{
+public interface UserRepository extends JpaRepository<UserEntity, String>{
 
 }

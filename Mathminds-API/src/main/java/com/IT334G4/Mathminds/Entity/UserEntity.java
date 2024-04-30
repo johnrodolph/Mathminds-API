@@ -2,8 +2,6 @@ package com.IT334G4.Mathminds.Entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -13,41 +11,36 @@ import javax.persistence.Table;
 public class UserEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
-	private int uid;
+	private String uid;
 
 	@Column(name = "firstname")
-	private String fname;
+	private String firstName;
 
 	@Column(name = "lastname")
 	private String lname;
 
 	private String email;
 
-	private String password;
-
 	private String userType;
+	
+	private String status;
 
 	public UserEntity() {
 		super();
+		this.status = "Active";
+		this.userType = "Student";
 	}
 
-	public UserEntity(int uid, String fname, String lname, String email, String password , String userType) {
+	public UserEntity(String uid, String fname, String lname, String email) {
 		this.uid = uid;
 		this.fname = fname;
 		this.lname = lname;
 		this.email = email;
-		this.password = password;
-		this.userType = userType;
 	}
 
-	public int getUid() {
+	public String getUid() {
 		return uid;
-	}
-
-	public void setUid(int uid) {
-		this.uid = uid;
 	}
 
 	public String getFname() {
@@ -74,14 +67,6 @@ public class UserEntity {
 		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public String getUserType() {
         return userType;
     }
@@ -90,7 +75,12 @@ public class UserEntity {
         this.userType = userType;
     }
 
-	
-	
+	public String getStatus(){
+		return status;
+	}
+
+	public void setStatus(String status){
+		this.status = status;
+	}
 
 }
