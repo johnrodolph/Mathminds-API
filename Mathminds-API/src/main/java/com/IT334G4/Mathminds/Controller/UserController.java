@@ -55,5 +55,10 @@ public class UserController {
     public UserEntity getUserByUid(@RequestParam String uid){
         return userService.getUserByUid(uid);
     }
+    @GetMapping("/getUserProfileInfo")
+public UserEntity getUserProfileInfo(@RequestParam String uid){
+    return userService.getUserProfileInfo(uid);
+}
 
+  
 }

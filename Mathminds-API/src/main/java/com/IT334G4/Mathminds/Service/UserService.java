@@ -70,4 +70,12 @@ public class UserService {
 		return user;
     }
 
+    public UserEntity getUserProfileInfo(String uid) {
+        UserEntity user = userRepo.findById(uid).orElseThrow(() -> new NoSuchElementException("User " + uid + " does not exist."));
+        UserEntity userProfileInfo = new UserEntity();
+        userProfileInfo.setFname(user.getFname());
+        userProfileInfo.setLname(user.getLname());
+        userProfileInfo.setEmail(user.getEmail());
+        return userProfileInfo;
+    }
 }
