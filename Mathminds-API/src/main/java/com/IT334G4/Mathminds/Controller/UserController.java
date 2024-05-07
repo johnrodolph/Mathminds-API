@@ -50,4 +50,10 @@ public class UserController {
     public String disableUser(@PathVariable String uid){
         return userService.disableUser(uid);
     }
+
+    @GetMapping("/getUserByUid")
+    public UserEntity getUserByUid(@RequestParam String uid){
+        return userService.getUserByUid(uid);
+    }
+
 }

@@ -64,4 +64,10 @@ public class UserService {
         return message;
     }
 
+    // For User Profile Page (GET USER INFO)
+    public UserEntity getUserByUid(String uid){
+        UserEntity user = userRepo.findById(uid).orElseThrow(() ->new NoSuchElementException("User " + uid + " does not exist."));
+		return user;
+    }
+
 }
