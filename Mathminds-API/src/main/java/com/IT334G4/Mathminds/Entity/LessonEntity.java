@@ -3,6 +3,7 @@ package com.IT334G4.Mathminds.Entity;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,7 +24,7 @@ public class LessonEntity implements Serializable{
     private String lessonTitle;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "lesson")
+    @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL)
     private List<TopicEntity> lessonTopics;
 
     public LessonEntity(){

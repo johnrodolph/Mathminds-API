@@ -4,10 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.IT334G4.Mathminds.Entity.LessonEntity;
@@ -33,5 +37,15 @@ public class LessonController {
     @GetMapping("/getAllLessons")
     public List<LessonEntity> getAllLessons(){
         return lessonService.getAllLessons();
+    }
+
+    @PutMapping("/updateLesson")
+    public LessonEntity updateLesson(@RequestParam int lessonId, @RequestBody LessonEntity newLessonDetails){
+        return lessonService.updateLesson(lessonId, newLessonDetails);
+    }
+
+    @DeleteMapping("/deleteLesson/{lessonId}")
+    public String deleteLesson(@PathVariable int lessonId){
+        return lessonService.deleteLesson(lessonId);
     }
 }
