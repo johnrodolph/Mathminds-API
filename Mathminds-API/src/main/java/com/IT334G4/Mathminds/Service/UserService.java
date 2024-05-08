@@ -71,7 +71,7 @@ public class UserService {
     }
 
     public UserEntity getUserProfileInfo(String uid) {
-        UserEntity user = userRepo.findById(uid).orElseThrow(() -> new NoSuchElementException("User " + uid + " does not exist."));
+        UserEntity user = getUserByUid(uid);
         UserEntity userProfileInfo = new UserEntity();
         userProfileInfo.setFname(user.getFname());
         userProfileInfo.setLname(user.getLname());
