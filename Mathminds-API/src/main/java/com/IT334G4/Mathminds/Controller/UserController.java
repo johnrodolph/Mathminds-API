@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.IT334G4.Mathminds.Entity.UserEntity;
+import com.IT334G4.Mathminds.Response.UserProfileInfoDTO;
 import com.IT334G4.Mathminds.Service.UserService;
 
 @RestController
@@ -55,10 +56,11 @@ public class UserController {
     public UserEntity getUserByUid(@RequestParam String uid){
         return userService.getUserByUid(uid);
     }
-    @GetMapping("/getUserProfileInfo")
-public UserEntity getUserProfileInfo(@RequestParam String uid) {
-    return userService.getUserProfileInfo(uid);
-}
+    
+     @GetMapping("/getUserProfileInfo/{uid}")
+    public UserProfileInfoDTO getUserProfileInfo(@PathVariable String uid) {
+        return userService.getUserProfileInfo(uid);
+    }
 
   
 }
