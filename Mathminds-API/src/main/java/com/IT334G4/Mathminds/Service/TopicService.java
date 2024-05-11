@@ -53,4 +53,11 @@ public class TopicService {
 
         return msg;
     }
+
+    // GET TOPIC BY topicId
+    public TopicEntity getTopicByTopicId(int topicId){
+        TopicEntity topic = new TopicEntity();
+        topic = topicRepo.findById(topicId).orElseThrow(() ->new NoSuchElementException("Topic " + topicId + " does not exist."));
+        return topic;
+    } 
 }

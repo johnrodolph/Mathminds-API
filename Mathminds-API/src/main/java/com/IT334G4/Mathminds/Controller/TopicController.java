@@ -48,4 +48,9 @@ public class TopicController {
     public String deleteTopic(@PathVariable int topicId){
         return topicService.deleteTopic(topicId);
     }
+
+    @GetMapping("/getTopicByTopicId")
+    public TopicEntity getTopicByTopicId(@RequestParam int topicId){
+        return topicService.getTopicByTopicId(topicId);
+    }
 }
