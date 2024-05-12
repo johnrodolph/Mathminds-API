@@ -57,8 +57,8 @@ public class UserController {
         return userService.getUserByUid(uid);
     }
     
-     @GetMapping("/getUserProfileInfo/{uid}")
-    public UserProfileInfoDTO getUserProfileInfo(@PathVariable String uid) {
+     @GetMapping("/getUserProfileInfo")
+    public UserProfileInfoDTO getUserProfileInfo(@RequestParam String uid) {
         return userService.getUserProfileInfo(uid);
     }
 

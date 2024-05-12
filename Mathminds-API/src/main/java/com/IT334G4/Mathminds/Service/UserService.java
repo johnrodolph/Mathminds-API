@@ -5,7 +5,6 @@ import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import com.IT334G4.Mathminds.Entity.UserEntity;
 import com.IT334G4.Mathminds.Repository.UserRepository;
@@ -72,7 +71,6 @@ public class UserService {
 		return user;
     }
 
-     @GetMapping("/getUserProfileInfo/{uid}")
     public UserProfileInfoDTO getUserProfileInfo(String uid) {
         UserEntity user = userRepo.findById(uid).orElseThrow(() ->new NoSuchElementException("User " + uid + " does not exist."));
 
