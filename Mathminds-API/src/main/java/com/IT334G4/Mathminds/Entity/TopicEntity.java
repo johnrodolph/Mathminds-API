@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapKeyColumn;
 import javax.persistence.Table;
 
+import com.IT334G4.Mathminds.OtherClasses.TopicContent;
+import com.IT334G4.Mathminds.OtherClasses.TopicContentConverter;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
@@ -29,7 +32,6 @@ public class TopicEntity {
     @JoinColumn(name = "lesson_id")
     private LessonEntity lesson;
 
-    // CHECK COMMENTS BELOW Y I ADDED THIS ATTRIBUTE
     @Column(name = "lesson_id", insertable = false, updatable = false)
     private int lessonId;
 
@@ -39,13 +41,14 @@ public class TopicEntity {
     @CollectionTable(name = "topic_content_mapping", joinColumns = @JoinColumn(name = "topic_id"))
     @MapKeyColumn(name = "order_index")
     @Column(name = "content")
-    private Map<Integer, String> topicContent = new HashMap<>();
+    @Convert(converter = TopicContentConverter.class, attributeName = "value")
+    private Map<Integer, TopicContent> topicContent = new HashMap<>();
 
     public TopicEntity() {
         super();
     }
 
-    public TopicEntity(int topicId, LessonEntity lesson, String topicTitle, Map<Integer, String> topicContent) {
+    public TopicEntity(int topicId, LessonEntity lesson, String topicTitle, Map<Integer, TopicContent> topicContent) {
         this.topicId = topicId;
         this.lesson = lesson;
         this.topicTitle = topicTitle;
@@ -76,27 +79,15 @@ public class TopicEntity {
         this.topicTitle = topicTitle;
     }
 
-    public Map<Integer, String> getTopicContent() {
+    public Map<Integer, TopicContent> getTopicContent() {
         return topicContent;
     }
 
-    public void setTopicContent(Map<Integer, String> topicContent) {
+    public void setTopicContent(Map<Integer, TopicContent> topicContent) {
         this.topicContent = topicContent;
     }
 
-    // ADDED THE LESSON ID ATTRIBUTE SO THAT lessonId IT WILL ALSO BE INCLUDED WHEN FETCHING ALL TOPICS
-    // TEMP FIX
-    /*  JPA DOESN'T RETURN FOREIGN KEYS WHEN FETCHING
-        https://stackoverflow.com/questions/72110341/find-all-data-using-foreign-key-from-referenced-table-in-spring-boot-jpa
-        https://stackoverflow.com/questions/72133781/spring-jpa-not-returning-foreign-keys-in-response
-        https://stackoverflow.com/questions/71991102/spring-data-jpa-findall-does-not-return-relations-data/71993222#71993222
-    */
-    
-    // FUNCTION FOR INCLUDING THE LESSONID
-    public int getLessonId(){
+    public int getLessonId() {
         return this.lessonId;
     }
-
-    
-
 }
