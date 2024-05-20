@@ -54,4 +54,10 @@ public class LessonService {
         
         return message;
     }
+
+    public LessonEntity getLessonById(int lessonId){
+        LessonEntity lesson = new LessonEntity();
+        lesson = lessonRepo.findById(lessonId).orElseThrow(() ->new NoSuchElementException("Lesson " + lessonId + " does not exist."));
+        return lesson;
+    }
 }

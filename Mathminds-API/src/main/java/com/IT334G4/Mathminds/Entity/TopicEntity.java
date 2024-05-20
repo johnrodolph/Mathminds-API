@@ -42,7 +42,7 @@ public class TopicEntity {
     @ElementCollection
     @CollectionTable(name = "topic_content_mapping", joinColumns = @JoinColumn(name = "topic_id"))
     @MapKeyColumn(name = "order_index")
-    @Column(name = "content")
+    @Column(name = "content", length = 1000)
     @Convert(converter = TopicContentConverter.class, attributeName = "value")
     private Map<Integer, TopicContent> topicContent = new HashMap<>();
 
