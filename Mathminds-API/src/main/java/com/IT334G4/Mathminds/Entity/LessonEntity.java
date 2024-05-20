@@ -33,9 +33,10 @@ public class LessonEntity implements Serializable{
         super();
     }
 
-    public LessonEntity(int lessonId, String lessonTitle, List<TopicEntity> lessonTopics) {
+    public LessonEntity(int lessonId, String lessonTitle, String lessonDescription, List<TopicEntity> lessonTopics) {
         this.lessonId = lessonId;
         this.lessonTitle = lessonTitle;
+        this.lessonDescription = lessonDescription;
         this.lessonTopics = lessonTopics;
     }
     
