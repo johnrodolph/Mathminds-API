@@ -23,6 +23,8 @@ public class LessonEntity implements Serializable{
 	private int lessonId;
     private String lessonTitle;
 
+    private String lessonDescription;
+
     @JsonManagedReference
     @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL)
     private List<TopicEntity> lessonTopics;
@@ -47,6 +49,14 @@ public class LessonEntity implements Serializable{
 
     public void setLessonTitle(String lessonTitle) {
         this.lessonTitle = lessonTitle;
+    }
+    
+    public String getLessonDescription() {
+        return lessonDescription;
+    }
+
+    public void setLessonDescription(String lessonDescription) {
+        this.lessonDescription = lessonDescription;
     }
 
     public List<TopicEntity> getLessonTopics() {

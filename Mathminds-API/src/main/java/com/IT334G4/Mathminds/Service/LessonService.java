@@ -28,6 +28,7 @@ public class LessonService {
         try{
             lesson = lessonRepo.findById(lessonId).get();
             lesson.setLessonTitle(newLessonDetails.getLessonTitle());
+            lesson.setLessonDescription(newLessonDetails.getLessonDescription());
 
         }catch(NoSuchElementException ex){
             throw new NoSuchElementException("Lesson" + lessonId + "does not exist");
