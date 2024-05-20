@@ -37,6 +37,8 @@ public class TopicEntity {
 
     private String topicTitle;
 
+    private String topicDescription;
+
     @ElementCollection
     @CollectionTable(name = "topic_content_mapping", joinColumns = @JoinColumn(name = "topic_id"))
     @MapKeyColumn(name = "order_index")
@@ -79,6 +81,14 @@ public class TopicEntity {
         this.topicTitle = topicTitle;
     }
 
+    public String getTopicDescription() {
+        return topicDescription;
+    }
+
+    public void setTopicDescription(String topicDescription) {
+        this.topicDescription = topicDescription;
+    }
+
     public Map<Integer, TopicContent> getTopicContent() {
         return topicContent;
     }
@@ -90,4 +100,5 @@ public class TopicEntity {
     public int getLessonId() {
         return this.lessonId;
     }
+    
 }

@@ -32,6 +32,7 @@ public class TopicService {
         try{
             topic = topicRepo.findById(topicId).get();
             topic.setTopicTitle(newTopicDetails.getTopicTitle());
+            topic.setTopicDescription(newTopicDetails.getTopicDescription());
             topic.setTopicContent(newTopicDetails.getTopicContent());
 
         }catch(NoSuchElementException ex){
