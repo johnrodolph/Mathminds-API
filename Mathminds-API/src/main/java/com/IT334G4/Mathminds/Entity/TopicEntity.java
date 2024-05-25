@@ -37,6 +37,7 @@ public class TopicEntity {
 
     private String topicTitle;
 
+    @Column(length = 150)
     private String topicDescription;
 
     @ElementCollection
