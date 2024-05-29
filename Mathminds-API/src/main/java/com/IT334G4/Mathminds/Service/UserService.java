@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.IT334G4.Mathminds.Entity.UserEntity;
 import com.IT334G4.Mathminds.Repository.UserRepository;
+import com.IT334G4.Mathminds.Response.UserProfileInfoDTO;
 
 @Service
 public class UserService {
@@ -70,4 +71,21 @@ public class UserService {
 		return user;
     }
 
+    public UserProfileInfoDTO getUserProfileInfo(String uid) {
+        UserEntity user = userRepo.findById(uid).orElseThrow(() ->new NoSuchElementException("User " + uid + " does not exist."));
+
+        UserProfileInfoDTO userResponseProfileInfo = new UserProfileInfoDTO();
+        userResponseProfileInfo.setFname(user.getFname());
+        userResponseProfileInfo.setLname(user.getLname());
+        userResponseProfileInfo.setEmail(user.getEmail());
+        return userResponseProfileInfo;
+    }
+
+    // Get user role
+    public String getUserRole(String uid){
+        UserEntity user = userRepo.findById(uid).orElseThrow(() ->new NoSuchElementException("User " + uid + " does not exist."));
+        return user.getUserType();
+    }
+
+    
 }
