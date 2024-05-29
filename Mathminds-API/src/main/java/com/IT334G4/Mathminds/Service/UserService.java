@@ -81,5 +81,11 @@ public class UserService {
         return userResponseProfileInfo;
     }
 
+    // Get user role
+    public String getUserRole(String uid){
+        UserEntity user = userRepo.findById(uid).orElseThrow(() ->new NoSuchElementException("User " + uid + " does not exist."));
+        return user.getUserType();
+    }
+
     
 }

@@ -57,9 +57,14 @@ public class UserController {
         return userService.getUserByUid(uid);
     }
     
-     @GetMapping("/getUserProfileInfo")
+    @GetMapping("/getUserProfileInfo")
     public UserProfileInfoDTO getUserProfileInfo(@RequestParam String uid) {
         return userService.getUserProfileInfo(uid);
+    }
+
+    @GetMapping("/getUserRole")
+    public String getUserRole(@RequestParam String uid) {
+        return userService.getUserRole(uid);
     }
 
   
