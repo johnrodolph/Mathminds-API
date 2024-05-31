@@ -29,15 +29,20 @@ public class LessonEntity implements Serializable{
     @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL)
     private List<TopicEntity> lessonTopics;
 
+    @JsonManagedReference
+    @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<LessonQuizEntity> lessonQuiz;
+
     public LessonEntity(){
         super();
     }
 
-    public LessonEntity(int lessonId, String lessonTitle, String lessonDescription, List<TopicEntity> lessonTopics) {
+    public LessonEntity(int lessonId, String lessonTitle, String lessonDescription, List<TopicEntity> lessonTopics, List<LessonQuizEntity> lessonQuiz) {
         this.lessonId = lessonId;
         this.lessonTitle = lessonTitle;
         this.lessonDescription = lessonDescription;
         this.lessonTopics = lessonTopics;
+        this.lessonQuiz = lessonQuiz;
     }
     
     public int getLessonId() {
@@ -67,5 +72,15 @@ public class LessonEntity implements Serializable{
     public void setLessonTopics(List<TopicEntity> lessonTopics) {
         this.lessonTopics = lessonTopics;
     }
+
+    public List<LessonQuizEntity> getLessonQuiz() {
+        return lessonQuiz;
+    }
+
+    public void setLessonQuiz(List<LessonQuizEntity> lessonQuiz) {
+        this.lessonQuiz = lessonQuiz;
+    }
+
+    
 
 }
