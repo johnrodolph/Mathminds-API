@@ -45,4 +45,10 @@ public class LessonQuizService {
         }
         return msg;
     }
+
+    public LessonQuizEntity getLessonQuizById(int lessonQuizId){
+        LessonQuizEntity lessonQuiz = new LessonQuizEntity();
+        lessonQuiz = lessonQuizRepo.findById(lessonQuizId).orElseThrow(() ->new NoSuchElementException("LessonQuiz " + lessonQuizId + " does not exist."));
+        return lessonQuiz;
+    } 
 }

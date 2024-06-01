@@ -48,4 +48,9 @@ public class LessonQuizController {
     public String deleteLesson(@PathVariable int lessonQuizId){
         return lessonQuizService.deleteLessonQuiz(lessonQuizId);
     }
+    
+    @GetMapping("/getLessonQuizById")
+    public LessonQuizEntity getLessonQuizById (@RequestParam int getLessonQuizById){
+        return lessonQuizService.getLessonQuizById(getLessonQuizById);
+    }
 }
