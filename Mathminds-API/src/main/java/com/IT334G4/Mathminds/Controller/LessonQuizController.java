@@ -50,7 +50,8 @@ public class LessonQuizController {
     }
     
     @GetMapping("/getLessonQuizById")
-    public LessonQuizEntity getLessonQuizById (@RequestParam int getLessonQuizById){
-        return lessonQuizService.getLessonQuizById(getLessonQuizById);
+    public LessonQuizEntity getLessonQuizById(@RequestParam int lessonQuizId) {
+        return lessonQuizService.getLessonQuizById(lessonQuizId);
     }
+
 }
