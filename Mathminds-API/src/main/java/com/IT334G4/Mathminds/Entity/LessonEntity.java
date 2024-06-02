@@ -30,7 +30,7 @@ public class LessonEntity implements Serializable{
     private List<TopicEntity> lessonTopics;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL)
     private List<LessonQuizEntity> lessonQuiz;
 
     public LessonEntity(){

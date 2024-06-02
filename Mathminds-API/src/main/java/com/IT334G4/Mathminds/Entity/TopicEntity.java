@@ -1,8 +1,10 @@
 package com.IT334G4.Mathminds.Entity;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -14,7 +16,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapKeyColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 import com.IT334G4.Mathminds.OtherClasses.TopicContent;
 import com.IT334G4.Mathminds.OtherClasses.TopicContentConverter;
@@ -46,6 +50,10 @@ public class TopicEntity {
     @Column(name = "content", length = 1000)
     @Convert(converter = TopicContentConverter.class, attributeName = "value")
     private Map<Integer, TopicContent> topicContent = new HashMap<>();
+
+    
+    @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserProgressEntity> userProgresses;
 
     public TopicEntity() {
         super();
