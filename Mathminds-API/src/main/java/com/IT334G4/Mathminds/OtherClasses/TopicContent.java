@@ -11,6 +11,8 @@ public class TopicContent {
     private String question;
     private String correctAnswer;
     private Map<Integer, String> incorrectAnswers;
+    private String imageUrl;
+    private String imageDescription;
 
     // Constructors
     public TopicContent() {}
@@ -23,6 +25,11 @@ public class TopicContent {
         this.question = question;
         this.correctAnswer = correctAnswer;
         this.incorrectAnswers = incorrectAnswers;
+    }
+
+    public TopicContent(String imageUrl, String imageDescription) {
+        this.imageUrl = imageUrl;
+        this.imageDescription = imageDescription;
     }
 
     public String getType() {
@@ -65,4 +72,22 @@ public class TopicContent {
     public void setIncorrectAnswers(Map<Integer, String> incorrectAnswers) {
         this.incorrectAnswers = incorrectAnswers;
     }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getImageDescription() {
+        return imageDescription;
+    }
+
+    public void setImageDescription(String imageDescription) {
+        this.imageDescription = imageDescription;
+    }
+
+    
 }

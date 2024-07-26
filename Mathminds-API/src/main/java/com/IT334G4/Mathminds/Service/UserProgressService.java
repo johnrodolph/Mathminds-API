@@ -50,5 +50,9 @@ public class UserProgressService {
         ));
     }
 
+    public boolean isTopicCompleted(UserEntity user, TopicEntity topic) {
+        UserProgressEntity progress = userProgressRepo.findByUserAndTopic(user, topic);
+        return progress != null && progress.isCompleted();
+    }
     
 }

@@ -1,6 +1,7 @@
 package com.IT334G4.Mathminds.Controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -52,5 +53,10 @@ public class LessonController {
     @GetMapping("/getLessonById")
     public LessonEntity getLessonById(@RequestParam int lessonId){
         return lessonService.getLessonById(lessonId);
+    }
+
+    @GetMapping("/lessonWithProgress/{lessonId}")
+    public Map<String, Object> getLessonWithProgress(@PathVariable int lessonId, @RequestParam String uid) {
+        return lessonService.getLessonWithProgress(lessonId, uid);
     }
 }
