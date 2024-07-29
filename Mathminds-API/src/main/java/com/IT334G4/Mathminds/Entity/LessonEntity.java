@@ -33,16 +33,19 @@ public class LessonEntity implements Serializable{
     @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL)
     private List<LessonQuizEntity> lessonQuiz;
 
+    private String lessonBadgeImageUrl;
+
     public LessonEntity(){
         super();
     }
 
-    public LessonEntity(int lessonId, String lessonTitle, String lessonDescription, List<TopicEntity> lessonTopics, List<LessonQuizEntity> lessonQuiz) {
+    public LessonEntity(int lessonId, String lessonTitle, String lessonDescription, List<TopicEntity> lessonTopics, List<LessonQuizEntity> lessonQuiz, String lessonBadgeImageUrl) {
         this.lessonId = lessonId;
         this.lessonTitle = lessonTitle;
         this.lessonDescription = lessonDescription;
         this.lessonTopics = lessonTopics;
         this.lessonQuiz = lessonQuiz;
+        this.lessonBadgeImageUrl = lessonBadgeImageUrl;
     }
     
     public int getLessonId() {
@@ -80,6 +83,16 @@ public class LessonEntity implements Serializable{
     public void setLessonQuiz(List<LessonQuizEntity> lessonQuiz) {
         this.lessonQuiz = lessonQuiz;
     }
+
+    public String getLessonBadgeImageUrl() {
+        return lessonBadgeImageUrl;
+    }
+
+    public void setLessonBadgeImageUrl(String lessonBadgeImageUrl) {
+        this.lessonBadgeImageUrl = lessonBadgeImageUrl;
+    }
+
+    
 
     
 

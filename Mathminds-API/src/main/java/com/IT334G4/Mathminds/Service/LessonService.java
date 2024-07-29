@@ -40,6 +40,7 @@ public class LessonService {
             lesson = lessonRepo.findById(lessonId).get();
             lesson.setLessonTitle(newLessonDetails.getLessonTitle());
             lesson.setLessonDescription(newLessonDetails.getLessonDescription());
+            lesson.setLessonBadgeImageUrl(newLessonDetails.getLessonBadgeImageUrl());
 
         }catch(NoSuchElementException ex){
             throw new NoSuchElementException("Lesson" + lessonId + "does not exist");
