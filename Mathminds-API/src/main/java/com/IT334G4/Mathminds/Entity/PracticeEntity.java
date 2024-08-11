@@ -31,7 +31,7 @@ public class PracticeEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "topic_id", nullable = false)
-    @JsonIgnoreProperties({"topicContent", "topicDescription", "topicContent", "topicTitle", "lessonId"})
+    @JsonIgnoreProperties({"topicContent", "topicDescription", "topicContent", "lessonId"})
     private TopicEntity topic;
 
     @ElementCollection

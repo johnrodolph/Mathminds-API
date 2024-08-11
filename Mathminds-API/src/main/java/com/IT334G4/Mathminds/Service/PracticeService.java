@@ -51,5 +51,9 @@ public class PracticeService {
         return msg;
     }
 
+    public List<PracticeEntity> getPracticeByTopicId(int topicId) {
+        return practiceRepo.findByTopicTopicId(topicId);
+    }
+
 
 }

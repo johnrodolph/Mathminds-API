@@ -48,4 +48,9 @@ public class PracticeController {
     public String deletePractice(@PathVariable int practiceId){
         return practiceService.deletePractice(practiceId);
     }
+
+    @GetMapping("/getPracticeByTopicId")
+    public List<PracticeEntity> getPracticeByTopicId(@RequestParam int topicId){
+        return practiceService.getPracticeByTopicId(topicId);
+    }
 }
