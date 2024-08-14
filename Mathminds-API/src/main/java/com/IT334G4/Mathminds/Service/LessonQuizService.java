@@ -28,6 +28,7 @@ public class LessonQuizService {
         try{
             lessonQuiz = lessonQuizRepo.findById(lessonQuizId).get();
             lessonQuiz.setLessonQuizQA(newLessonQuizDetails.getLessonQuizQA());
+            lessonQuiz.setIsAdministered(newLessonQuizDetails.getIsAdministered());
         }catch(NoSuchElementException ex){
             throw new NoSuchElementException("Lesson" + lessonQuizId + "does not exist");
         }finally{
@@ -50,5 +51,10 @@ public class LessonQuizService {
         LessonQuizEntity lessonQuiz = new LessonQuizEntity();
         lessonQuiz = lessonQuizRepo.findById(lessonQuizId).orElseThrow(() ->new NoSuchElementException("LessonQuiz " + lessonQuizId + " does not exist."));
         return lessonQuiz;
-    } 
+    }
+
+    public int checkQuizAdministered(int lessonQuizId) {
+        LessonQuizEntity lessonQuiz = lessonQuizRepo.findById(lessonQuizId).orElseThrow(() -> new NoSuchElementException("LessonQuiz " + lessonQuizId + " does not exist."));
+        return lessonQuiz.getIsAdministered() ? 1 : 0;
+    }
 }

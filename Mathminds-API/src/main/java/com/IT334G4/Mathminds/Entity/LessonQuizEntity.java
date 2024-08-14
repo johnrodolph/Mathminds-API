@@ -26,6 +26,8 @@ public class LessonQuizEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int lessonQuizId;
+
+    private boolean isAdministered;
     
     @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
@@ -72,5 +74,11 @@ public class LessonQuizEntity {
         return lesson.getLessonTitle();
     }
 
-    
+    public boolean getIsAdministered() {
+        return isAdministered;
+    }
+
+    public void setIsAdministered(boolean isAdministered) {
+        this.isAdministered = isAdministered;
+    }
 }

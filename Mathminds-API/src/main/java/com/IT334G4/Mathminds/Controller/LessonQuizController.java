@@ -3,6 +3,7 @@ package com.IT334G4.Mathminds.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,4 +55,9 @@ public class LessonQuizController {
         return lessonQuizService.getLessonQuizById(lessonQuizId);
     }
 
+    @GetMapping("/check/{lessonQuizId}")
+    public ResponseEntity<Integer> checkIfQuizIsAdministered(@PathVariable int lessonQuizId) {
+        int isAdministered = lessonQuizService.checkQuizAdministered(lessonQuizId);
+        return ResponseEntity.ok(isAdministered);
+    }
 }
