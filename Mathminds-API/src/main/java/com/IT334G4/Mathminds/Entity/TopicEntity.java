@@ -37,7 +37,7 @@ public class TopicEntity {
     private LessonEntity lesson;
 
     @Column(name = "lesson_id", insertable = false, updatable = false)
-    private int lessonId;
+    private Integer lessonId;
 
     private String topicTitle;
 
@@ -106,7 +106,7 @@ public class TopicEntity {
         this.topicContent = topicContent;
     }
 
-    public int getLessonId() {
+    public Integer getLessonId() {
         return this.lessonId;
     }
     
