@@ -3,6 +3,7 @@ package com.IT334G4.Mathminds.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.IT334G4.Mathminds.Entity.UserEntity;
+import com.IT334G4.Mathminds.Response.UserManagementDTO;
 import com.IT334G4.Mathminds.Response.UserProfileInfoDTO;
 import com.IT334G4.Mathminds.Service.UserService;
 
@@ -67,5 +69,15 @@ public class UserController {
         return userService.getUserRole(uid);
     }
 
-  
+    @PutMapping("/changeRole/{uid}")
+    public ResponseEntity<UserManagementDTO> changeUserRole(@PathVariable String uid, @RequestParam String newRole) {
+        UserManagementDTO updatedUser = userService.changeUserRole(uid, newRole);
+        return ResponseEntity.ok(updatedUser);
+    }
+
+    @GetMapping("/getAllUsersForAdmin")
+    public ResponseEntity<List<UserManagementDTO>> getAllUsersForAdmin() {
+        List<UserManagementDTO> users = userService.getAllUsersForAdmin();
+        return ResponseEntity.ok(users);
+    }
 }

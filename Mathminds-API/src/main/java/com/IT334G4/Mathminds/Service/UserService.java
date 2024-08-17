@@ -2,12 +2,14 @@ package com.IT334G4.Mathminds.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.IT334G4.Mathminds.Entity.UserEntity;
 import com.IT334G4.Mathminds.Repository.UserRepository;
+import com.IT334G4.Mathminds.Response.UserManagementDTO;
 import com.IT334G4.Mathminds.Response.UserProfileInfoDTO;
 
 @Service
@@ -87,5 +89,38 @@ public class UserService {
         return user.getUserType();
     }
 
-    
+    // New method to change user role
+    public UserManagementDTO changeUserRole(String uid, String newRole) {
+        UserEntity user = userRepo.findById(uid)
+                .orElseThrow(() -> new NoSuchElementException("User " + uid + " does not exist."));
+        
+        // Update the user's role
+        user.setUserType(newRole);
+        
+        // Save the updated user entity
+        UserEntity updatedUser = userRepo.save(user);
+        
+        // Convert the updated UserEntity to UserManagementDTO
+        return new UserManagementDTO(
+            updatedUser.getUid(),
+            updatedUser.getFname(),
+            updatedUser.getLname(),
+            updatedUser.getEmail(),
+            updatedUser.getStatus(),
+            updatedUser.getUserType()
+        );
+    }
+
+    //get all users for admin
+    public List<UserManagementDTO> getAllUsersForAdmin() {
+        List<UserEntity> users = userRepo.findAll();
+        return users.stream().map(user -> new UserManagementDTO(
+            user.getUid(),
+            user.getFname(),
+            user.getLname(),
+            user.getEmail(),
+            user.getStatus(),
+            user.getUserType()
+        )).collect(Collectors.toList());
+    }
 }
