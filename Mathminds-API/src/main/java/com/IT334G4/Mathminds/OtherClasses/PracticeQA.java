@@ -23,6 +23,7 @@ public class PracticeQA {
     @JsonIgnore
     private int practiceqaId;
 
+    @Column(length = 1000)
     private String question;
     private String correctAnswer;
 
