@@ -3,6 +3,8 @@ package com.IT334G4.Mathminds.Service;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,13 +42,16 @@ public class PracticeService {
     }
 
     // DELETE
-    public String deletePractice(int practiceId){
+    @Transactional
+    public String deletePracticeByTopicId(int topicId) {
         String msg = "";
-        if(practiceRepo.findById(practiceId) != null){
-            practiceRepo.deleteById(practiceId);
-            msg = "Topic " + practiceId + " is succesfully deleted.";
-        }else {
-            msg = "Topic " + practiceId + " does not exist.";
+        List<PracticeEntity> practices = practiceRepo.findByTopicTopicId(topicId);
+    
+        if (practices != null && !practices.isEmpty()) {
+            practiceRepo.deleteByTopicTopicId(topicId);
+            msg = "Practice with topicId " + topicId + " was successfully deleted.";
+        } else {
+            msg = "Practice with topicId " + topicId + " does not exist.";
         }
         return msg;
     }
