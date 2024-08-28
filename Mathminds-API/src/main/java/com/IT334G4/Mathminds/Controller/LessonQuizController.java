@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.IT334G4.Mathminds.Entity.LessonQuizEntity;
+import com.IT334G4.Mathminds.OtherClasses.LessonQuizQA;
 import com.IT334G4.Mathminds.Service.LessonQuizService;
 
 @RestController
@@ -59,5 +60,10 @@ public class LessonQuizController {
     public ResponseEntity<Integer> checkIfQuizIsAdministered(@PathVariable int lessonQuizId) {
         int isAdministered = lessonQuizService.checkQuizAdministered(lessonQuizId);
         return ResponseEntity.ok(isAdministered);
+    }
+
+    @GetMapping("/getRandomizedLessonQuizById/{lessonQuizId}")
+    public List<LessonQuizQA> getRandomizedLessonQuizById(@PathVariable int lessonQuizId) {
+        return lessonQuizService.getRandomizedLessonQuizById(lessonQuizId);
     }
 }
