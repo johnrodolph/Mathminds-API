@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="tbl_user_badge")
 public class UserBadgeEntity {
@@ -21,6 +23,7 @@ public class UserBadgeEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "lesson_id", nullable = false)
     private LessonEntity lesson;

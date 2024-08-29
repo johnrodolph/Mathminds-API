@@ -33,6 +33,9 @@ public class LessonEntity implements Serializable{
     @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL)
     private List<LessonQuizEntity> lessonQuiz;
 
+    @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL)
+    private List<UserBadgeEntity> userBadges;
+
     private String lessonBadgeImageUrl;
 
     public LessonEntity(){
