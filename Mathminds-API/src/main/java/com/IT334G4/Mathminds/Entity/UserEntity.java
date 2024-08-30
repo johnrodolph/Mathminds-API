@@ -1,8 +1,12 @@
 package com.IT334G4.Mathminds.Entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,17 +30,21 @@ public class UserEntity {
 	
 	private String status;
 
+	@OneToMany(mappedBy = "user")
+    private Set<UserBadgeEntity> earnedBadges = new HashSet<>();
+
 	public UserEntity() {
 		super();
 		this.status = "Active";
 		this.userType = "Student";
 	}
 
-	public UserEntity(String uid, String fname, String lname, String email) {
+	public UserEntity(String uid, String fname, String lname, String email, Set<UserBadgeEntity> earnedBadges) {
 		this.uid = uid;
 		this.fname = fname;
 		this.lname = lname;
 		this.email = email;
+		this.earnedBadges = earnedBadges;
 	}
 
 	public String getUid() {
@@ -82,5 +90,15 @@ public class UserEntity {
 	public void setStatus(String status){
 		this.status = status;
 	}
+
+	public Set<UserBadgeEntity> getEarnedBadges() {
+		return earnedBadges;
+	}
+
+	public void setEarnedBadges(Set<UserBadgeEntity> earnedBadges) {
+		this.earnedBadges = earnedBadges;
+	}
+
+	
 
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.IT334G4.Mathminds.Entity.PracticeEntity;
+import com.IT334G4.Mathminds.OtherClasses.PracticeQA;
 import com.IT334G4.Mathminds.Service.PracticeService;
 
 @RestController
@@ -47,5 +48,15 @@ public class PracticeController {
     @DeleteMapping("/deletePractice/{practiceId}")
     public String deletePractice(@PathVariable int practiceId){
         return practiceService.deletePractice(practiceId);
+    }
+
+    @GetMapping("/getPracticeByTopicId")
+    public List<PracticeEntity> getPracticeByTopicId(@RequestParam int topicId){
+        return practiceService.getPracticeByTopicId(topicId);
+    }
+
+    @GetMapping("/getRandomizedPracticeByTopicId")
+    public List<PracticeQA> getRandomizedPracticeByTopicId(int topicId){
+        return practiceService.getRandomizedPracticeByTopicId(topicId);
     }
 }

@@ -1,12 +1,16 @@
 package com.IT334G4.Mathminds.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.IT334G4.Mathminds.Entity.PracticeEntity;
+import com.IT334G4.Mathminds.OtherClasses.PracticeQA;
 import com.IT334G4.Mathminds.Repository.PracticeRepository;
 
 @Service
@@ -49,6 +53,29 @@ public class PracticeService {
             msg = "Topic " + practiceId + " does not exist.";
         }
         return msg;
+    }
+
+    public List<PracticeEntity> getPracticeByTopicId(int topicId) {
+        return practiceRepo.findByTopicTopicId(topicId);
+    }
+
+    public List<PracticeQA> getRandomizedPracticeByTopicId(int topicId) {
+        final int maxQuestions = 10; // Set the default maximum to 10
+        List<PracticeEntity> practiceList = practiceRepo.findByTopicTopicId(topicId);
+        List<PracticeQA> allQuestions = new ArrayList<>();
+
+        // Extract all questions from the practice entities
+        for (PracticeEntity practice : practiceList) {
+            for (Map.Entry<Integer, PracticeQA> entry : practice.getPractice_qa().entrySet()) {
+                allQuestions.add(entry.getValue());
+            }
+        }
+
+        // Randomize the questions
+        Collections.shuffle(allQuestions);
+
+        // Return a sublist of up to maxQuestions
+        return allQuestions.subList(0, Math.min(maxQuestions, allQuestions.size()));
     }
 
 
