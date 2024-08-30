@@ -31,7 +31,7 @@ public class PracticeEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "topic_id", nullable = false)
-    @JsonIgnoreProperties({"topicContent", "topicDescription", "topicContent", "lessonId"})
+    @JsonIgnoreProperties({ "topicContent", "topicDescription", "topicContent", "lessonId" })
     private TopicEntity topic;
 
     @ElementCollection
@@ -39,6 +39,7 @@ public class PracticeEntity {
     @MapKeyColumn(name = "order_index")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Map<Integer, PracticeQA> practice_qa = new HashMap<>();
+
     public PracticeEntity() {
         super();
     }
@@ -63,10 +64,9 @@ public class PracticeEntity {
 
     public void setPractice_qa(Map<Integer, PracticeQA> practice_qa) {
         this.practice_qa.clear();
-        if(practice_qa != null){
+        if (practice_qa != null) {
             this.practice_qa.putAll(practice_qa);
         }
     }
-    
 
 }

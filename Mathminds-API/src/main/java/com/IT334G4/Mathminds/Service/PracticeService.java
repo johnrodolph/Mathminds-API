@@ -19,37 +19,37 @@ public class PracticeService {
     PracticeRepository practiceRepo;
 
     // CREATE
-    public PracticeEntity insertPractice(PracticeEntity practice){
+    public PracticeEntity insertPractice(PracticeEntity practice) {
         return practiceRepo.save(practice);
     }
 
     // READ
-    public List<PracticeEntity> getAllPractice(){
+    public List<PracticeEntity> getAllPractice() {
         return practiceRepo.findAll();
     }
 
     // UPDATE
     @SuppressWarnings("finally")
-    public PracticeEntity updatePractice(int practiceId, PracticeEntity newPracticeDetails){
+    public PracticeEntity updatePractice(int practiceId, PracticeEntity newPracticeDetails) {
         PracticeEntity practice = new PracticeEntity();
-        try{
+        try {
             practice = practiceRepo.findById(practiceId).get();
             practice.setPractice_qa(newPracticeDetails.getPractice_qa());
 
-        }catch(NoSuchElementException ex){
+        } catch (NoSuchElementException ex) {
             throw new NoSuchElementException("Practice " + practiceId + " does not exist.");
-        }finally{
+        } finally {
             return practiceRepo.save(practice);
         }
     }
 
     // DELETE
-    public String deletePractice(int practiceId){
+    public String deletePractice(int practiceId) {
         String msg = "";
-        if(practiceRepo.findById(practiceId) != null){
+        if (practiceRepo.findById(practiceId) != null) {
             practiceRepo.deleteById(practiceId);
             msg = "Topic " + practiceId + " is succesfully deleted.";
-        }else {
+        } else {
             msg = "Topic " + practiceId + " does not exist.";
         }
         return msg;
@@ -77,6 +77,5 @@ public class PracticeService {
         // Return a sublist of up to maxQuestions
         return allQuestions.subList(0, Math.min(maxQuestions, allQuestions.size()));
     }
-
 
 }

@@ -33,7 +33,7 @@ public class PracticeQA {
     @Column(name = "incorrect_answer")
     private List<String> incorrectAnswers = new ArrayList<>();
 
-    public PracticeQA(){
+    public PracticeQA() {
         super();
     }
 
@@ -71,5 +71,5 @@ public class PracticeQA {
     public void setIncorrectAnswers(List<String> incorrectAnswers) {
         this.incorrectAnswers = incorrectAnswers;
     }
-    
+
 }
