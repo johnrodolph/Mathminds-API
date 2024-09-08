@@ -18,8 +18,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.IT334G4.Mathminds.OtherClasses.PracticeQA;
+import com.IT334G4.Mathminds.OtherClasses.PracticeQADeserializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
@@ -31,14 +34,16 @@ public class PracticeEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "topic_id", nullable = false)
-    @JsonIgnoreProperties({"topicContent", "topicDescription", "topicContent", "lessonId"})
+    @JsonIgnoreProperties({ "topicContent", "topicDescription", "topicContent", "lessonId" })
     private TopicEntity topic;
 
     @ElementCollection
     @CollectionTable(name = "practice_qa_mapping", joinColumns = @JoinColumn(name = "practice_id"))
     @MapKeyColumn(name = "order_index")
+    @JsonDeserialize(using = PracticeQADeserializer.class)
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Map<Integer, PracticeQA> practice_qa = new HashMap<>();
+
     public PracticeEntity() {
         super();
     }
@@ -63,10 +68,9 @@ public class PracticeEntity {
 
     public void setPractice_qa(Map<Integer, PracticeQA> practice_qa) {
         this.practice_qa.clear();
-        if(practice_qa != null){
+        if (practice_qa != null) {
             this.practice_qa.putAll(practice_qa);
         }
     }
-    
 
 }
