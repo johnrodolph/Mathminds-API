@@ -59,8 +59,7 @@ public class PracticeService {
         return practiceRepo.findByTopicTopicId(topicId);
     }
 
-    public List<PracticeQA> getRandomizedPracticeByTopicId(int topicId) {
-        final int maxQuestions = 10; // Set the default maximum to 10
+    public List<PracticeQA> getRandomizedPracticeByTopicId(int topicId, int maxQuestions) {
         List<PracticeEntity> practiceList = practiceRepo.findByTopicTopicId(topicId);
         List<PracticeQA> allQuestions = new ArrayList<>();
 
