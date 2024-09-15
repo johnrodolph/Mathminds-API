@@ -56,7 +56,7 @@ public class PracticeController {
     }
 
     @GetMapping("/getRandomizedPracticeByTopicId")
-    public List<PracticeQA> getRandomizedPracticeByTopicId(int topicId){
-        return practiceService.getRandomizedPracticeByTopicId(topicId);
+    public List<PracticeQA> getRandomizedPracticeByTopicId(@RequestParam int topicId, @RequestParam int maxQuestions){
+        return practiceService.getRandomizedPracticeByTopicId(topicId, maxQuestions);
     }
 }
