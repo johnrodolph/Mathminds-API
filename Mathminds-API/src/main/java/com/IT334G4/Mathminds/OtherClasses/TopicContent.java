@@ -1,5 +1,6 @@
 package com.IT334G4.Mathminds.OtherClasses;
 
+import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -13,6 +14,9 @@ public class TopicContent {
     private Map<Integer, String> incorrectAnswers;
     private String imageUrl;
     private String imageDescription;
+
+    private List<String> storyboardAnimations;
+    private String storyboardBgImage;
 
     // Constructors
     public TopicContent() {}
@@ -30,6 +34,11 @@ public class TopicContent {
     public TopicContent(String imageUrl, String imageDescription) {
         this.imageUrl = imageUrl;
         this.imageDescription = imageDescription;
+    }
+
+    public TopicContent(List<String> storyboardAnimations, String storyboardBgImage){
+        this.storyboardAnimations = storyboardAnimations;
+        this.storyboardBgImage = storyboardBgImage;
     }
 
     public String getType() {
@@ -88,6 +97,24 @@ public class TopicContent {
     public void setImageDescription(String imageDescription) {
         this.imageDescription = imageDescription;
     }
+
+    public List<String> getStoryboardAnimations() {
+        return storyboardAnimations;
+    }
+
+    public void setStoryboardAnimations(List<String> storyboardAnimations) {
+        this.storyboardAnimations = storyboardAnimations;
+    }
+
+    public String getstoryboardBgImage() {
+        return storyboardBgImage;
+    }
+
+    public void setstoryboardBgImage(String storyboardBgImage) {
+        this.storyboardBgImage = storyboardBgImage;
+    }
+
+    
 
     
 }
