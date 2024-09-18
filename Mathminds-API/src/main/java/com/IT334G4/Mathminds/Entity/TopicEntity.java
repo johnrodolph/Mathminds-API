@@ -41,19 +41,22 @@ public class TopicEntity {
 
     private String topicTitle;
 
-    @Column(length = 150)
+    @Column(length = 250)
     private String topicDescription;
 
     @ElementCollection
     @CollectionTable(name = "topic_content_mapping", joinColumns = @JoinColumn(name = "topic_id"))
     @MapKeyColumn(name = "order_index")
-    @Column(name = "content", length = 1000)
+    @Column(name = "content", columnDefinition = "TEXT")
     @Convert(converter = TopicContentConverter.class, attributeName = "value")
     private Map<Integer, TopicContent> topicContent = new HashMap<>();
 
     
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserProgressEntity> userProgresses;
+
+    @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PracticeEntity> practices;
 
     public TopicEntity() {
         super();
