@@ -18,6 +18,9 @@ public class TopicContent {
     private List<String> storyboardAnimations;
     private String storyboardBgImage;
 
+    private String youtubeLink;
+    private String youtubeVidDescription;
+
     // Constructors
     public TopicContent() {}
 
@@ -31,9 +34,18 @@ public class TopicContent {
         this.incorrectAnswers = incorrectAnswers;
     }
 
-    public TopicContent(String imageUrl, String imageDescription) {
-        this.imageUrl = imageUrl;
-        this.imageDescription = imageDescription;
+    public TopicContent(String type, String param1, String param2) {
+        this.type = type;
+        switch (type) {
+            case "image":
+                this.imageUrl = param1;
+                this.imageDescription = param2;
+                break;
+            case "youtube":
+                this.youtubeLink = param1;
+                this.youtubeVidDescription = param2;
+                break;
+        }
     }
 
     public TopicContent(List<String> storyboardAnimations, String storyboardBgImage){
@@ -106,15 +118,28 @@ public class TopicContent {
         this.storyboardAnimations = storyboardAnimations;
     }
 
-    public String getstoryboardBgImage() {
+    public String getStoryboardBgImage() {
         return storyboardBgImage;
     }
 
-    public void setstoryboardBgImage(String storyboardBgImage) {
+    public void setStoryboardBgImage(String storyboardBgImage) {
         this.storyboardBgImage = storyboardBgImage;
     }
 
-    
+    public String getYoutubeLink() {
+        return youtubeLink;
+    }
 
+    public void setYoutubeLink(String youtubeLink) {
+        this.youtubeLink = youtubeLink;
+    }
+
+    public String getYoutubeVidDescription() {
+        return youtubeVidDescription;
+    }
+
+    public void setYoutubeVidDescription(String youtubeVidDescription) {
+        this.youtubeVidDescription = youtubeVidDescription;
+    }
     
 }
