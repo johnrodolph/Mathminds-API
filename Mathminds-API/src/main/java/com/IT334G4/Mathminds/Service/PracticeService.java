@@ -47,7 +47,7 @@ public class PracticeService {
 
     // DELETE
     @Transactional
-    public String deletePracticeByTopicId(int topicId) {
+    public String deletePractice(int topicId) {
         String msg = "";
         List<PracticeEntity> practices = practiceRepo.findByTopicTopicId(topicId);
     
