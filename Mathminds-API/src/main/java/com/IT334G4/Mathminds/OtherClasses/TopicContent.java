@@ -1,145 +1,36 @@
 package com.IT334G4.Mathminds.OtherClasses;
 
-import java.util.List;
-import java.util.Map;
-
+import com.IT334G4.Mathminds.OtherClasses.TopicContentTypes.EmbeddedGameContent;
+import com.IT334G4.Mathminds.OtherClasses.TopicContentTypes.ImageContent;
+import com.IT334G4.Mathminds.OtherClasses.TopicContentTypes.QuestionContent;
+import com.IT334G4.Mathminds.OtherClasses.TopicContentTypes.StoryboardContent;
+import com.IT334G4.Mathminds.OtherClasses.TopicContentTypes.TextContent;
+import com.IT334G4.Mathminds.OtherClasses.TopicContentTypes.YoutubeVidContent;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TopicContent {
-    private String type;
-    private String content;
-    private String question;
-    private String correctAnswer;
-    private Map<Integer, String> incorrectAnswers;
-    private String imageUrl;
-    private String imageDescription;
-
-    private List<String> storyboardAnimations;
-    private String storyboardBgImage;
-
-    private String youtubeLink;
-    private String youtubeVidDescription;
-
-    // Constructors
-    public TopicContent() {}
-
-    public TopicContent(String content) {
-        this.content = content;
-    }
-
-    public TopicContent(String question, String correctAnswer, Map<Integer, String> incorrectAnswers) {
-        this.question = question;
-        this.correctAnswer = correctAnswer;
-        this.incorrectAnswers = incorrectAnswers;
-    }
-
-    public TopicContent(String type, String param1, String param2) {
-        this.type = type;
-        switch (type) {
-            case "image":
-                this.imageUrl = param1;
-                this.imageDescription = param2;
-                break;
-            case "youtube":
-                this.youtubeLink = param1;
-                this.youtubeVidDescription = param2;
-                break;
-        }
-    }
-
-    public TopicContent(List<String> storyboardAnimations, String storyboardBgImage){
-        this.storyboardAnimations = storyboardAnimations;
-        this.storyboardBgImage = storyboardBgImage;
-    }
+@JsonTypeInfo(use= JsonTypeInfo.Id.DEDUCTION)
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = TextContent.class),
+    @JsonSubTypes.Type(value = QuestionContent.class, name = "question"),
+    @JsonSubTypes.Type(value = ImageContent.class, name = "image"),
+    @JsonSubTypes.Type(value = YoutubeVidContent.class, name = "youtubeVid"),
+    @JsonSubTypes.Type(value = StoryboardContent.class, name = "storyboard"),
+    @JsonSubTypes.Type(value = EmbeddedGameContent.class, name = "embeddedGame")
+})
+public abstract class TopicContent {
+    protected String type;
 
     public String getType() {
         return type;
     }
 
+    @JsonProperty
     public void setType(String type) {
         this.type = type;
     }
-
-    // Getters and setters
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(String question) {
-        this.question = question;
-    }
-
-    public String getCorrectAnswer() {
-        return correctAnswer;
-    }
-
-    public void setCorrectAnswer(String correctAnswer) {
-        this.correctAnswer = correctAnswer;
-    }
-
-    public Map<Integer, String> getIncorrectAnswers() {
-        return incorrectAnswers;
-    }
-
-    public void setIncorrectAnswers(Map<Integer, String> incorrectAnswers) {
-        this.incorrectAnswers = incorrectAnswers;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public String getImageDescription() {
-        return imageDescription;
-    }
-
-    public void setImageDescription(String imageDescription) {
-        this.imageDescription = imageDescription;
-    }
-
-    public List<String> getStoryboardAnimations() {
-        return storyboardAnimations;
-    }
-
-    public void setStoryboardAnimations(List<String> storyboardAnimations) {
-        this.storyboardAnimations = storyboardAnimations;
-    }
-
-    public String getStoryboardBgImage() {
-        return storyboardBgImage;
-    }
-
-    public void setStoryboardBgImage(String storyboardBgImage) {
-        this.storyboardBgImage = storyboardBgImage;
-    }
-
-    public String getYoutubeLink() {
-        return youtubeLink;
-    }
-
-    public void setYoutubeLink(String youtubeLink) {
-        this.youtubeLink = youtubeLink;
-    }
-
-    public String getYoutubeVidDescription() {
-        return youtubeVidDescription;
-    }
-
-    public void setYoutubeVidDescription(String youtubeVidDescription) {
-        this.youtubeVidDescription = youtubeVidDescription;
-    }
-    
 }
+
