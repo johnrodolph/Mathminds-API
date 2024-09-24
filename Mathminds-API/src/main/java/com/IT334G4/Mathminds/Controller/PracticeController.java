@@ -26,37 +26,37 @@ public class PracticeController {
     PracticeService practiceService;
 
     @GetMapping("print")
-    public String printHello(){
+    public String printHello() {
         return "Hello, Practice Controller working!!!";
     }
 
     @PostMapping("/insertPractice")
-    public PracticeEntity insertPractice(@RequestBody PracticeEntity practice){
+    public PracticeEntity insertPractice(@RequestBody PracticeEntity practice) {
         return practiceService.insertPractice(practice);
     }
 
     @GetMapping("/getAllPractice")
-    public List<PracticeEntity> getAllPractice(){
+    public List<PracticeEntity> getAllPractice() {
         return practiceService.getAllPractice();
     }
 
     @PutMapping("/updatePractice")
-    public PracticeEntity updatePractice(@RequestParam int practiceId, @RequestBody PracticeEntity newPracticeDetails){
+    public PracticeEntity updatePractice(@RequestParam int practiceId, @RequestBody PracticeEntity newPracticeDetails) {
         return practiceService.updatePractice(practiceId, newPracticeDetails);
     }
 
     @DeleteMapping("/deletePractice/{practiceId}")
-    public String deletePractice(@PathVariable int practiceId){
+    public String deletePractice(@PathVariable int practiceId) {
         return practiceService.deletePractice(practiceId);
     }
 
     @GetMapping("/getPracticeByTopicId")
-    public List<PracticeEntity> getPracticeByTopicId(@RequestParam int topicId){
+    public List<PracticeEntity> getPracticeByTopicId(@RequestParam int topicId) {
         return practiceService.getPracticeByTopicId(topicId);
     }
 
     @GetMapping("/getRandomizedPracticeByTopicId")
-    public List<PracticeQA> getRandomizedPracticeByTopicId(@RequestParam int topicId, @RequestParam int maxQuestions){
+    public List<PracticeQA> getRandomizedPracticeByTopicId(@RequestParam int topicId, @RequestParam int maxQuestions) {
         return practiceService.getRandomizedPracticeByTopicId(topicId, maxQuestions);
     }
 }

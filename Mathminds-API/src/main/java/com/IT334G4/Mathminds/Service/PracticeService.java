@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -21,26 +22,26 @@ public class PracticeService {
     PracticeRepository practiceRepo;
 
     // CREATE
-    public PracticeEntity insertPractice(PracticeEntity practice){
+    public PracticeEntity insertPractice(PracticeEntity practice) {
         return practiceRepo.save(practice);
     }
 
     // READ
-    public List<PracticeEntity> getAllPractice(){
+    public List<PracticeEntity> getAllPractice() {
         return practiceRepo.findAll();
     }
 
     // UPDATE
     @SuppressWarnings("finally")
-    public PracticeEntity updatePractice(int practiceId, PracticeEntity newPracticeDetails){
+    public PracticeEntity updatePractice(int practiceId, PracticeEntity newPracticeDetails) {
         PracticeEntity practice = new PracticeEntity();
-        try{
+        try {
             practice = practiceRepo.findById(practiceId).get();
             practice.setPractice_qa(newPracticeDetails.getPractice_qa());
 
-        }catch(NoSuchElementException ex){
+        } catch (NoSuchElementException ex) {
             throw new NoSuchElementException("Practice " + practiceId + " does not exist.");
-        }finally{
+        } finally {
             return practiceRepo.save(practice);
         }
     }
@@ -50,7 +51,7 @@ public class PracticeService {
     public String deletePractice(int topicId) {
         String msg = "";
         List<PracticeEntity> practices = practiceRepo.findByTopicTopicId(topicId);
-    
+
         if (practices != null && !practices.isEmpty()) {
             practiceRepo.deleteByTopicTopicId(topicId);
             msg = "Practice with topicId " + topicId + " was successfully deleted.";
@@ -68,19 +69,25 @@ public class PracticeService {
         List<PracticeEntity> practiceList = practiceRepo.findByTopicTopicId(topicId);
         List<PracticeQA> allQuestions = new ArrayList<>();
 
-        // Extract all questions from the practice entities
         for (PracticeEntity practice : practiceList) {
             for (Map.Entry<Integer, PracticeQA> entry : practice.getPractice_qa().entrySet()) {
-                allQuestions.add(entry.getValue());
+                PracticeQA practiceQA = entry.getValue();
+
+                List<String> filteredIncorrectAnswers = practiceQA.getIncorrectAnswers().stream()
+                        .filter(answer -> answer != null && !answer.trim().isEmpty())
+                        .collect(Collectors.toList());
+
+                practiceQA.setIncorrectAnswers(filteredIncorrectAnswers);
+
+                if (!filteredIncorrectAnswers.isEmpty()) {
+                    allQuestions.add(practiceQA);
+                }
             }
         }
 
-        // Randomize the questions
         Collections.shuffle(allQuestions);
 
-        // Return a sublist of up to maxQuestions
         return allQuestions.subList(0, Math.min(maxQuestions, allQuestions.size()));
     }
-
 
 }
