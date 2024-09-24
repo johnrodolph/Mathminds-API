@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,18 +44,18 @@ public class PracticeService {
     }
 
     // DELETE
-    @Transactional
-    public String deletePractice(int topicId) {
-        String msg = "";
-        List<PracticeEntity> practices = practiceRepo.findByTopicTopicId(topicId);
-    
-        if (practices != null && !practices.isEmpty()) {
-            practiceRepo.deleteByTopicTopicId(topicId);
-            msg = "Practice with topicId " + topicId + " was successfully deleted.";
-        } else {
-            msg = "Practice with topicId " + topicId + " does not exist.";
+    public String deletePractice(int practiceId) {
+        String message = "";
+        try{
+            practiceRepo.findById(practiceId).get();
+            practiceRepo.deleteById(practiceId);
+
+            message = "Practice: " + practiceId + " has successfully been deleted";
+        }catch(NoSuchElementException ex){
+            message = "Practice " + practiceId + " does not exist.";
         }
-        return msg;
+        
+        return message;
     }
 
     public List<PracticeEntity> getPracticeByTopicId(int topicId) {
