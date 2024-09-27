@@ -7,6 +7,7 @@ import com.IT334G4.Mathminds.OtherClasses.TopicContent;
 public class StoryboardContent extends TopicContent {
     private List<String> storyboardAnimations;
     private String storyboardBgImage;
+    private String storyboardContext;
 
     public StoryboardContent() {
         this.type = "storyboard";
@@ -28,4 +29,14 @@ public class StoryboardContent extends TopicContent {
     public void setStoryboardBgImage(String storyboardBgImage) {
         this.storyboardBgImage = storyboardBgImage;
     }
+
+    public String getStoryboardContext() {
+        return storyboardContext;
+    }
+
+    public void setStoryboardContext(String storyboardContext) {
+        this.storyboardContext = storyboardContext;
+    }
+
+    
 }
