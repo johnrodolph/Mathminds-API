@@ -3,13 +3,12 @@ package com.IT334G4.Mathminds.Entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "tblUser")
@@ -32,8 +31,7 @@ public class UserEntity {
 	
 	private String status;
 
-	@OneToMany(mappedBy = "user")
-	@JsonManagedReference
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UserBadgeEntity> earnedBadges = new HashSet<>();
 
 	public UserEntity() {

@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="tbl_user_badge")
@@ -19,8 +20,8 @@ public class UserBadgeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userBadgeId;
 
-    @JsonBackReference
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 
