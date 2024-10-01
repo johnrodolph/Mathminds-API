@@ -19,6 +19,7 @@ public class UserBadgeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userBadgeId;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
