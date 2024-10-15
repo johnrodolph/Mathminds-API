@@ -12,71 +12,76 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tblUser")
-
 public class UserEntity {
 
-	@Id
-	@Column(name = "user_id")
-	private String uid;
+    @Id
+    @Column(name = "user_id")
+    private String uid;
 
-	@Column(name = "firstname")
-	private String fname;
+    @Column(name = "firstname")
+    private String fname;
 
-	@Column(name = "lastname")
-	private String lname;
+    @Column(name = "lastname")
+    private String lname;
 
-	private String email;
+    private String email;
 
-	private String userType;
-	
-	private String status;
+    private String userType;
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private String status;
+
+    private String profilePictureUrl;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UserBadgeEntity> earnedBadges = new HashSet<>();
 
-	public UserEntity() {
-		super();
-		this.status = "Active";
-		this.userType = "Student";
-	}
+    // Default constructor
+    public UserEntity() {
+        super();
+        this.status = "Active";
+        this.userType = "Student";
+        this.profilePictureUrl = ""; // Initialize to empty string or default profile picture URL
+    }
 
-	public UserEntity(String uid, String fname, String lname, String email, Set<UserBadgeEntity> earnedBadges) {
-		this.uid = uid;
-		this.fname = fname;
-		this.lname = lname;
-		this.email = email;
-		this.earnedBadges = earnedBadges;
-	}
+    // Constructor with profile picture URL
+    public UserEntity(String uid, String fname, String lname, String email, String profilePictureUrl, Set<UserBadgeEntity> earnedBadges) {
+        this.uid = uid;
+        this.fname = fname;
+        this.lname = lname;
+        this.email = email;
+        this.profilePictureUrl = profilePictureUrl;
+        this.earnedBadges = earnedBadges;
+    }
 
-	public String getUid() {
-		return uid;
-	}
+    public String getUid() {
+        return uid;
+    }
 
-	public String getFname() {
-		return fname;
-	}
+    public String getFname() {
+        return fname;
+    }
 
-	public void setFname(String fname) {
-		this.fname = fname;
-	}
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
 
-	public String getLname() {
-		return lname;
-	}
+    public String getLname() {
+        return lname;
+    }
 
-	public void setLname(String lname) {
-		this.lname = lname;
-	}
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getUserType() {
+    public String getUserType() {
         return userType;
     }
 
@@ -84,22 +89,28 @@ public class UserEntity {
         this.userType = userType;
     }
 
-	public String getStatus(){
-		return status;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	public void setStatus(String status){
-		this.status = status;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-	public Set<UserBadgeEntity> getEarnedBadges() {
-		return earnedBadges;
-	}
+    // Getter and Setter for profilePictureUrl
+    public String getProfilePictureUrl() {
+        return profilePictureUrl;
+    }
 
-	public void setEarnedBadges(Set<UserBadgeEntity> earnedBadges) {
-		this.earnedBadges = earnedBadges;
-	}
+    public void setProfilePictureUrl(String profilePictureUrl) {
+        this.profilePictureUrl = profilePictureUrl;
+    }
 
-	
+    public Set<UserBadgeEntity> getEarnedBadges() {
+        return earnedBadges;
+    }
 
+    public void setEarnedBadges(Set<UserBadgeEntity> earnedBadges) {
+        this.earnedBadges = earnedBadges;
+    }
 }

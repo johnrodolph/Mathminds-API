@@ -41,6 +41,7 @@ public class UserService {
             user.setLname(newUserDetails.getLname());
             user.setEmail(newUserDetails.getEmail());
             user.setUserType(newUserDetails.getUserType());
+            user.setProfilePictureUrl(newUserDetails.getProfilePictureUrl());
 
         }catch(NoSuchElementException ex){
             throw new NoSuchElementException("User" + uid + "does not exist");
@@ -80,6 +81,7 @@ public class UserService {
         userResponseProfileInfo.setFname(user.getFname());
         userResponseProfileInfo.setLname(user.getLname());
         userResponseProfileInfo.setEmail(user.getEmail());
+        userResponseProfileInfo.setProfilePictureUrl(user.getProfilePictureUrl());
         return userResponseProfileInfo;
     }
 

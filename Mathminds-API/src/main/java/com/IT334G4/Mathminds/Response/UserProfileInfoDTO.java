@@ -5,6 +5,7 @@ public class UserProfileInfoDTO {
     private String fname;
     private String lname;
     private String email;
+    private String profilePictureUrl;
 
     // Constructors
     public UserProfileInfoDTO() {
@@ -41,6 +42,14 @@ public class UserProfileInfoDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getProfilePictureUrl() {
+        return profilePictureUrl;
+    }
+
+    public void setProfilePictureUrl(String profilePictureUrl) {
+        this.profilePictureUrl = profilePictureUrl;
     }
 }
 
