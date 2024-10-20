@@ -1,0 +1,14 @@
+# Ignore compiled class files
+*.class
+
+# Ignore the Maven target directory
+target/*
+
+# Ignore sensitive application properties
+application.properties
+src/main/resources/application.properties
+
+# Ignore environment-specific properties (if used)
+application-prod.properties
+application-dev.properties
+
