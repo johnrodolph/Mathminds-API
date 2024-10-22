@@ -3,6 +3,8 @@
 
 # Ignore the Maven target directory
 target/*
+Mathminds-API/target/
+
 
 # Ignore sensitive application properties
 application.properties
