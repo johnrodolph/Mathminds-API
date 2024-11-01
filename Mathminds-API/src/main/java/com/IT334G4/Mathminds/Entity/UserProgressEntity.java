@@ -30,6 +30,10 @@ public class UserProgressEntity {
 
     private LocalDateTime timestamp;
 
+    private int userViewCount; // Track individual user's views of this topic
+    private LocalDateTime firstViewed; // When user first accessed the topic
+    private LocalDateTime lastViewed; // Last time user viewed the topic
+
     public UserProgressEntity() {
         super();
     }
@@ -76,4 +80,30 @@ public class UserProgressEntity {
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
+
+    public int getUserViewCount() {
+        return userViewCount;
+    }
+
+    public void setUserViewCount(int userViewCount) {
+        this.userViewCount = userViewCount;
+    }
+
+    public LocalDateTime getFirstViewed() {
+        return firstViewed;
+    }
+
+    public void setFirstViewed(LocalDateTime firstViewed) {
+        this.firstViewed = firstViewed;
+    }
+
+    public LocalDateTime getLastViewed() {
+        return lastViewed;
+    }
+
+    public void setLastViewed(LocalDateTime lastViewed) {
+        this.lastViewed = lastViewed;
+    }
+
+    
 }

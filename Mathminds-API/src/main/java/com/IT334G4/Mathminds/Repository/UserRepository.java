@@ -7,5 +7,5 @@ import com.IT334G4.Mathminds.Entity.UserEntity;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, String>{
-
+    long countByUserType(String userType);
 }

@@ -13,4 +13,5 @@ import com.IT334G4.Mathminds.Entity.UserEntity;
 public interface UserBadgeRepository extends JpaRepository<UserBadgeEntity, Integer>{
     boolean existsByUserAndLesson(UserEntity user, LessonEntity lesson);
     List<UserBadgeEntity> findByUser(UserEntity user);
+    long countByLesson(LessonEntity lesson);
 }

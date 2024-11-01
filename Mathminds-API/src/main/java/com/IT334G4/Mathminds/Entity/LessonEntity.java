@@ -1,6 +1,7 @@
 package com.IT334G4.Mathminds.Entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -38,8 +39,11 @@ public class LessonEntity implements Serializable{
 
     private String lessonBadgeImageUrl;
 
+    private LocalDateTime lessonDateAdded;
+
     public LessonEntity(){
         super();
+        this.lessonDateAdded = LocalDateTime.now();
     }
 
     public LessonEntity(int lessonId, String lessonTitle, String lessonDescription, List<TopicEntity> lessonTopics, List<LessonQuizEntity> lessonQuiz, String lessonBadgeImageUrl) {
@@ -49,6 +53,7 @@ public class LessonEntity implements Serializable{
         this.lessonTopics = lessonTopics;
         this.lessonQuiz = lessonQuiz;
         this.lessonBadgeImageUrl = lessonBadgeImageUrl;
+        this.lessonDateAdded = LocalDateTime.now();
     }
     
     public int getLessonId() {
@@ -95,8 +100,14 @@ public class LessonEntity implements Serializable{
         this.lessonBadgeImageUrl = lessonBadgeImageUrl;
     }
 
-    
+    public LocalDateTime getLessonDateAdded() {
+        return lessonDateAdded;
+    }
 
-    
+
+    public void setLessonDateAdded(LocalDateTime lessonDateAdded) {
+        this.lessonDateAdded = lessonDateAdded;
+    }
+
 
 }

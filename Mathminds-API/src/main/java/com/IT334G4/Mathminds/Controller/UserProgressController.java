@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.IT334G4.Mathminds.Entity.LessonEntity;
 import com.IT334G4.Mathminds.Entity.TopicEntity;
 import com.IT334G4.Mathminds.Entity.UserEntity;
+import com.IT334G4.Mathminds.Entity.UserProgressEntity;
 import com.IT334G4.Mathminds.Repository.LessonRepository;
 import com.IT334G4.Mathminds.Repository.TopicRepository;
 import com.IT334G4.Mathminds.Repository.UserRepository;
@@ -60,5 +61,17 @@ public class UserProgressController {
         UserEntity user = userRepo.findById(uid).orElseThrow(() -> new RuntimeException("User not found"));
         List<LessonEntity> lessons = lessonRepo.findAll();
         return userProgressService.getProgressForAllLessons(user, lessons);
+    }
+
+    @PostMapping("/trackTopicView")
+    public void trackTopicView(@RequestParam String uid, @RequestParam int topicId){
+        UserEntity user = userRepo.findById(uid).orElseThrow(() -> new RuntimeException("User not found"));
+        TopicEntity topic = topicRepo.findById(topicId).orElseThrow(() -> new RuntimeException("Topic not found"));
+        userProgressService.trackTopicView(user, topic);
+    }
+
+    @GetMapping("/getAllUserProgress")
+    public List<UserProgressEntity> getAllUserProgress(){
+        return userProgressService.getAllUserProgress();
     }
 }

@@ -1,5 +1,6 @@
 package com.IT334G4.Mathminds.Entity;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,8 +59,14 @@ public class TopicEntity {
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PracticeEntity> practices;
 
+    private LocalDateTime topicDateAdded;
+
+    private long topicViewCount;
+
     public TopicEntity() {
         super();
+        this.topicDateAdded = LocalDateTime.now();
+        this.topicViewCount = 0; 
     }
 
     public TopicEntity(int topicId, LessonEntity lesson, String topicTitle, Map<Integer, TopicContent> topicContent) {
@@ -67,6 +74,8 @@ public class TopicEntity {
         this.lesson = lesson;
         this.topicTitle = topicTitle;
         this.topicContent = topicContent;
+        this.topicDateAdded = LocalDateTime.now();
+        this.topicViewCount = 0;
     }
 
     public int getTopicId() {
@@ -112,5 +121,23 @@ public class TopicEntity {
     public int getLessonId() {
         return this.lessonId;
     }
+
+    public LocalDateTime getTopicDateAdded() {
+        return topicDateAdded;
+    }
+
+    public void setTopicDateAdded(LocalDateTime topicDateAdded) {
+        this.topicDateAdded = topicDateAdded;
+    }
+
+    public long getTopicViewCount() {
+        return topicViewCount;
+    }
+
+    public void setTopicViewCount(long topicViewCount) {
+        this.topicViewCount = topicViewCount;
+    }
+
+    
     
 }
