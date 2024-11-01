@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.IT334G4.Mathminds.Entity.LessonEntity;
 import com.IT334G4.Mathminds.Entity.TopicEntity;
 import com.IT334G4.Mathminds.Entity.UserEntity;
+// import com.IT334G4.Mathminds.Entity.UserProgressEntity;
 import com.IT334G4.Mathminds.Repository.LessonRepository;
 import com.IT334G4.Mathminds.Repository.TopicRepository;
 import com.IT334G4.Mathminds.Repository.UserBadgeRepository;
@@ -38,23 +39,27 @@ public class AnalyticsService {
     private UserProgressRepository userProgressRepository;
 
     // Unused
-    // public Map<String, Object> getAllAnalytics() {
+    // public Map<String, Object> getAllAnalytics(String uid) {
     //     Map<String, Object> analyticsData = new HashMap<>();
+    //     // analyticsData.put("userTopicsCompleted", userProgressRepository.countByUserUidAndCompleted(uid, true));
+    //     // analyticsData.put("userRecentTopicViewed", getUserRecentTopicViewed(uid));
+    //     // analyticsData.put("userBadgeCount", userBadgeRepository.countByUserUid(uid));
+    //     // analyticsData.put("userMostAccessedContent", getUserMostAccessedContent(uid));
 
     //     // Get all analytics data
-    //     analyticsData.put("recentLessons", getRecentLessons());
-    //     analyticsData.put("recentTopics", getRecentTopicTitles());
-    //     analyticsData.put("totalStudents", userRepository.countByUserType("Student"));
-    //     analyticsData.put("totalLessons", lessonRepository.count());
-    //     analyticsData.put("totalTopics", topicRepository.count());
-    //     analyticsData.put("totalTopicViewCounts", getTopicViewCounts());
-    //     analyticsData.put("totalPracticeActivities", practiceRepository.count());
-    //     analyticsData.put("totalBadgesAwarded", userBadgeRepository.count());
-    //     analyticsData.put("badgeCountPerLesson", getBadgeCountPerLesson());
-    //     analyticsData.put("totalLessonViewCounts", getLessonViewCounts());
-    //     analyticsData.put("totalLessonUniqueUserCounts",getLessonUniqueUserCounts());
-    //     analyticsData.put("completionAnalytics", getViewsToCompletionAnalytics());
-    //     analyticsData.put("topUsersByCompletedTopics", getTopUsersByCompletedTopics());
+    //     // analyticsData.put("recentLessons", getRecentLessons());
+    //     // analyticsData.put("recentTopics", getRecentTopicTitles());
+    //     // analyticsData.put("totalStudents", userRepository.countByUserType("Student"));
+    //     // analyticsData.put("totalLessons", lessonRepository.count());
+    //     // analyticsData.put("totalTopics", topicRepository.count());
+    //     // analyticsData.put("totalTopicViewCounts", getTopicViewCounts());
+    //     // analyticsData.put("totalPracticeActivities", practiceRepository.count());
+    //     // analyticsData.put("totalBadgesAwarded", userBadgeRepository.count());
+    //     // analyticsData.put("badgeCountPerLesson", getBadgeCountPerLesson());
+    //     // analyticsData.put("totalLessonViewCounts", getLessonViewCounts());
+    //     // analyticsData.put("totalLessonUniqueUserCounts",getLessonUniqueUserCounts());
+    //     // analyticsData.put("completionAnalytics", getViewsToCompletionAnalytics());
+    //     // analyticsData.put("topUsersByCompletedTopics", getTopUsersByCompletedTopics());
 
     //     return analyticsData;
     // }
@@ -233,19 +238,19 @@ public class AnalyticsService {
             ));
     }
 
-    // Fetches the top users with the most topics completed
-    private List<Map<String, Object>> getTopUsersByCompletedTopics() {
-        List<Object[]> results = userProgressRepository.findTopUsersByCompletedTopics();
+    // Fetches the top users with the most topics completed (Potential use for leaderboard)
+    // private List<Map<String, Object>> getTopUsersByCompletedTopics() {
+    //     List<Object[]> results = userProgressRepository.findTopUsersByCompletedTopics();
     
-        return results.stream().limit(5).map(result -> {
-            UserEntity user = (UserEntity) result[0];
-            Long completedCount = (Long) result[1];
-            Map<String, Object> userStats = new HashMap<>();
-            userStats.put("fullName", user.getFname() + " " + user.getLname());
-            userStats.put("completedTopicCount", completedCount);
-            return userStats;
-        }).collect(Collectors.toList());
-    }
+    //     return results.stream().limit(5).map(result -> {
+    //         UserEntity user = (UserEntity) result[0];
+    //         Long completedCount = (Long) result[1];
+    //         Map<String, Object> userStats = new HashMap<>();
+    //         userStats.put("fullName", user.getFname() + " " + user.getLname());
+    //         userStats.put("completedTopicCount", completedCount);
+    //         return userStats;
+    //     }).collect(Collectors.toList());
+    // }
 
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public class UnauthorizedAccessException extends RuntimeException {

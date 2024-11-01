@@ -19,5 +19,8 @@ public interface UserProgressRepository extends JpaRepository<UserProgressEntity
     int countByTopicAndCompleted(TopicEntity topic, boolean completed);
     @Query("SELECT up.user, COUNT(up) FROM UserProgressEntity up WHERE up.completed = true GROUP BY up.user ORDER BY COUNT(up) DESC")
     List<Object[]> findTopUsersByCompletedTopics();
+    int countByUserUidAndCompleted(String userId, boolean completed);
+    List<UserProgressEntity> findTop2ByUserUidOrderByLastViewedDesc(String userId);
+    List<UserProgressEntity> findTopByUserUidOrderByUserViewCountDesc(String userId);
     
 }

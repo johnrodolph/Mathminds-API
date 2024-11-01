@@ -14,4 +14,5 @@ public interface UserBadgeRepository extends JpaRepository<UserBadgeEntity, Inte
     boolean existsByUserAndLesson(UserEntity user, LessonEntity lesson);
     List<UserBadgeEntity> findByUser(UserEntity user);
     long countByLesson(LessonEntity lesson);
+    int countByUserUid(String userId);
 }
