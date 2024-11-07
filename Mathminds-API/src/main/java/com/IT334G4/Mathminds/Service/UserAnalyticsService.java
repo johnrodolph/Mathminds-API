@@ -20,6 +20,8 @@ import com.IT334G4.Mathminds.Repository.UserBadgeRepository;
 import com.IT334G4.Mathminds.Repository.UserProgressRepository;
 import com.IT334G4.Mathminds.Repository.UserPracticeProgressRepository;
 import com.IT334G4.Mathminds.Repository.UserRepository;
+import com.IT334G4.Mathminds.Repository.LessonRepository;
+import com.IT334G4.Mathminds.Repository.TopicRepository;
 
 @Service
 public class UserAnalyticsService {
@@ -38,6 +40,12 @@ public class UserAnalyticsService {
     @Autowired
     private PracticeRepository practiceRepo;
 
+    @Autowired
+    private LessonRepository lessonRepo;
+
+    @Autowired
+    private TopicRepository topicRepo;
+
     public Map<String, Object> getIndividualUserDashboardData(String uid) {
         UserEntity user = userRepository.findById(uid).orElseThrow(() -> new RuntimeException("User not found"));
         
@@ -52,6 +60,8 @@ public class UserAnalyticsService {
         analyticsData.put("userMostAccessedContent", getUserMostAccessedContent(uid));
         analyticsData.put("userRecentPracticeViewed", getUserRecentPracticeViewed(uid));
         analyticsData.put("userMostAccessedPractice", getUserMostAccessedPractice(user));
+        analyticsData.put("totalLessons", lessonRepo.count());
+        analyticsData.put("totalTopics", topicRepo.count());
 
         return analyticsData;
     }
