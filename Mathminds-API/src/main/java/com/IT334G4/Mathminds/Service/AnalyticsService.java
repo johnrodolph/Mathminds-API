@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.IT334G4.Mathminds.Entity.LessonEntity;
 import com.IT334G4.Mathminds.Entity.TopicEntity;
 import com.IT334G4.Mathminds.Entity.UserEntity;
+import com.IT334G4.Mathminds.Entity.PracticeEntity;
 // import com.IT334G4.Mathminds.Entity.UserProgressEntity;
 import com.IT334G4.Mathminds.Repository.LessonRepository;
 import com.IT334G4.Mathminds.Repository.TopicRepository;
 import com.IT334G4.Mathminds.Repository.UserBadgeRepository;
 import com.IT334G4.Mathminds.Repository.UserProgressRepository;
 import com.IT334G4.Mathminds.Repository.UserRepository;
+import com.IT334G4.Mathminds.Repository.PracticeRepository;
 
 @Service
 public class AnalyticsService {
@@ -37,6 +39,9 @@ public class AnalyticsService {
 
     @Autowired
     private UserProgressRepository userProgressRepository;
+
+    @Autowired
+    private PracticeRepository practiceRepository;
 
     // Unused
     // public Map<String, Object> getAllAnalytics(String uid) {
@@ -86,6 +91,7 @@ public class AnalyticsService {
         analyticsData.put("recentLessons", getRecentLessons());
         analyticsData.put("recentTopics", getRecentTopicTitles());
         analyticsData.put("totalBadgesAwarded", userBadgeRepository.count());
+        analyticsData.put("top3MostAccessedPractices", getTop3MostAccessedPractices());
 
         return analyticsData;
     }
@@ -236,6 +242,29 @@ public class AnalyticsService {
                 TopicEntity::getTopicTitle,
                 topic -> topic.getTopicViewCount()
             ));
+    }
+
+    // For fetching view counts for each practice
+    //private Map<String, Long> getPracticeViewCounts() {
+    //    List<PracticeEntity> allPractice = practiceRepository.findAll();
+
+    //    return allPractice.stream()
+    //        .collect(Collectors.toMap(
+    //            practice -> practice.getTopic().getTopicTitle(), // Accessing the topic title via the topic relationship
+    //            PracticeEntity::getPracticeViewCount,
+    //            (existing, replacement) -> existing // Handle duplicate keys by keeping the existing entry
+    //        ));
+    //}
+
+    public List<Map<String, Object>> getTop3MostAccessedPractices() {
+        List<PracticeEntity> topPractices = practiceRepository.findTop3ByOrderByPracticeViewCountDesc();
+    
+        return topPractices.stream().map(practice -> {
+            Map<String, Object> practiceData = new HashMap<>();
+            practiceData.put("practiceViewCount", practice.getPracticeViewCount());
+            practiceData.put("associatedTopicTitle", practice.getTopic().getTopicTitle()); // Include topic information
+            return practiceData;
+        }).collect(Collectors.toList());
     }
 
     // Fetches the top users with the most topics completed (Potential use for leaderboard)

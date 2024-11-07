@@ -21,4 +21,7 @@ public interface PracticeRepository extends JpaRepository<PracticeEntity, Intege
 
     List<PracticeEntity> findByTopicTopicId(int topicId);
 
+    @Query("SELECT p FROM PracticeEntity p ORDER BY p.practiceViewCount DESC")
+    List<PracticeEntity> findTop3ByOrderByPracticeViewCountDesc();
+
 }

@@ -76,8 +76,8 @@ public class UserController {
     }
 
     @GetMapping("/getAllUsersForAdmin")
-    public ResponseEntity<List<UserManagementDTO>> getAllUsersForAdmin() {
-        List<UserManagementDTO> users = userService.getAllUsersForAdmin();
+    public ResponseEntity<List<UserManagementDTO>> getAllUsersForAdmin(String uid) {
+        List<UserManagementDTO> users = userService.getAllUsersForAdmin(uid);
         return ResponseEntity.ok(users);
     }
 }

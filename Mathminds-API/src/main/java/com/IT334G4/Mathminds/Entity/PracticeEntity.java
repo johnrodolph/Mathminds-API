@@ -39,14 +39,19 @@ public class PracticeEntity {
     @MapKeyColumn(name = "order_index")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Map<Integer, PracticeQA> practice_qa = new HashMap<>();
+
+    private long practiceViewCount;
+
     public PracticeEntity() {
         super();
+        this.practiceViewCount = 0;
     }
 
     public PracticeEntity(int practiceId, TopicEntity topic, Map<Integer, PracticeQA> practice_qa) {
         this.practiceId = practiceId;
         this.topic = topic;
         this.practice_qa = practice_qa;
+        this.practiceViewCount = 0;
     }
 
     public int getPracticeId() {
@@ -68,5 +73,11 @@ public class PracticeEntity {
         }
     }
     
+    public long getPracticeViewCount() {
+        return practiceViewCount;
+    }
 
+    public void setPracticeViewCount(long practiceViewCount) {
+        this.practiceViewCount = practiceViewCount;
+    }
 }

@@ -5,7 +5,9 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.IT334G4.Mathminds.Entity.UserEntity;
 import com.IT334G4.Mathminds.Repository.UserRepository;
@@ -111,8 +113,15 @@ public class UserService {
         );
     }
 
-    //get all users for admin
-    public List<UserManagementDTO> getAllUsersForAdmin() {
+    public List<UserManagementDTO> getAllUsersForAdmin(String adminUid) {
+        // Check if the requesting user is an admin
+        UserEntity requestingUser = userRepo.findById(adminUid).orElseThrow(() -> new RuntimeException("User not found"));
+        
+        if (!"Admin".equals(requestingUser.getUserType())) {
+            throw new UnauthorizedAccessException("Access denied. Only admins can access this data.");
+        }
+    
+        // Fetch all users if the check passes
         List<UserEntity> users = userRepo.findAll();
         return users.stream().map(user -> new UserManagementDTO(
             user.getUid(),
@@ -122,5 +131,12 @@ public class UserService {
             user.getStatus(),
             user.getUserType()
         )).collect(Collectors.toList());
+    }
+
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public class UnauthorizedAccessException extends RuntimeException {
+        public UnauthorizedAccessException(String message) {
+            super(message);
+        }
     }
 }
