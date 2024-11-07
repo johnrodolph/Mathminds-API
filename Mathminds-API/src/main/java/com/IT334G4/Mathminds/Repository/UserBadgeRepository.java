@@ -16,6 +16,6 @@ public interface UserBadgeRepository extends JpaRepository<UserBadgeEntity, Inte
     List<UserBadgeEntity> findByUser(UserEntity user);
     long countByLesson(LessonEntity lesson);
     int countByUserUid(String userId);
-    @Query("SELECT ub.user, COUNT(ub) FROM UserBadgeEntity ub GROUP BY ub.user ORDER BY COUNT(ub) DESC")
+    @Query("SELECT ub.user, COUNT(ub) FROM UserBadgeEntity ub WHERE ub.user.userType = 'Student' GROUP BY ub.user ORDER BY COUNT(ub) DESC")
     List<Object[]> findTopUsersByBadgeCount();
 }
