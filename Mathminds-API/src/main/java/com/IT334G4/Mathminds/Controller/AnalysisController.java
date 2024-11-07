@@ -50,4 +50,10 @@ public class AnalysisController {
         return ResponseEntity.ok(analyticsData);
     }
 
+    @GetMapping("/studentDashboardContent")
+    public ResponseEntity<Map<String, Object>> getStudentDashboardContent(@RequestParam String uid) {
+        Map<String, Object> analyticsData = analyticsService.getStudentDashboardContent(uid);
+        return ResponseEntity.ok(analyticsData);
+    }
+
 }

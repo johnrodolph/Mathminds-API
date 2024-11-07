@@ -60,6 +60,7 @@ public class AnalyticsService {
     //     // analyticsData.put("totalLessonUniqueUserCounts",getLessonUniqueUserCounts());
     //     // analyticsData.put("completionAnalytics", getViewsToCompletionAnalytics());
     //     // analyticsData.put("topUsersByCompletedTopics", getTopUsersByCompletedTopics());
+    //     // analyticsData.put("topUsersByCompletion", getTopUsersByCompletion());
 
     //     return analyticsData;
     // }
@@ -137,6 +138,29 @@ public class AnalyticsService {
         return analyticsData;
     }
 
+    public Map<String, Object> getStudentDashboardContent(String uid) {
+        UserEntity user = new UserEntity();
+        user = userRepository.findById(uid).get();
+        
+        if (user == null) {
+            throw new RuntimeException("User not found");
+        }
+
+        String userType = user.getUserType();
+        if (!("Teacher".equals(userType) || "Admin".equals(userType))) {
+            // Return limited data for unauthorized users
+            throw new UnauthorizedAccessException("Access denied.");
+        }
+
+        Map<String, Object> analyticsData = new HashMap<>();
+        analyticsData.put("totalStudents", userRepository.countByUserType("Student"));
+        analyticsData.put("topUsersByCompletion", getTopUsersByCompletion()); 
+        analyticsData.put("topUsersByBadges", getTopUsersByBadgeCount()); 
+
+        return analyticsData;
+    }
+
+    // ************************************************************** METHODS FOR FETCHING DATA CONTENTS **************************************************************
     // Fetches the recently added lessons
     private List<Map<String, Object>> getRecentLessons() {
         List<LessonEntity> recentLessons = lessonRepository.findTop2ByOrderByLessonIdDesc();
@@ -251,6 +275,37 @@ public class AnalyticsService {
     //         return userStats;
     //     }).collect(Collectors.toList());
     // }
+
+    public List<Map<String, Object>> getTopUsersByCompletion() {
+        List<Object[]> results = userProgressRepository.findTopUsersByCompletedLessonsAndTopics();
+        
+        return results.stream().limit(5).map(result -> {
+            UserEntity user = (UserEntity) result[0];
+            Long topicCount = (Long) result[1];
+            Long lessonCount = (Long) result[2];
+            
+            Map<String, Object> userStats = new HashMap<>();
+            userStats.put("fullName", user.getFname() + " " + user.getLname());
+            userStats.put("completedLessonCount", lessonCount);
+            userStats.put("completedTopicCount", topicCount);
+            
+            return userStats;
+        }).collect(Collectors.toList());
+    }
+
+    public List<Map<String, Object>> getTopUsersByBadgeCount() {
+        List<Object[]> results = userBadgeRepository.findTopUsersByBadgeCount();
+    
+        // Limit to top 5 users
+        return results.stream().limit(5).map(result -> {
+            UserEntity user = (UserEntity) result[0];  // The user
+            Long badgeCount = (Long) result[1];        // The badge count
+            Map<String, Object> userStats = new HashMap<>();
+            userStats.put("fullName", user.getFname() + " " + user.getLname());
+            userStats.put("badgeCount", badgeCount);
+            return userStats;
+        }).collect(Collectors.toList());
+    }
 
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public class UnauthorizedAccessException extends RuntimeException {
