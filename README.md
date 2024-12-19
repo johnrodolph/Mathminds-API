@@ -18,7 +18,7 @@ This project serves as the backend for the MathMinds. It is developed using Java
 ### Steps to Install and Run the Project
 1. **Clone the Repository**: 
    ```bash
-   git clone https://github.com/8maaan/MathMinds.git
+   git clone https://github.com/johnrodolph/Mathminds-API.git
 
 2. **Ensure MySQL Database and Schema Exist**: 
   - Make sure MySQL is running.
