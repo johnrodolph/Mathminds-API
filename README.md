@@ -7,6 +7,9 @@ This project serves as the backend for the MathMinds. It is developed using Java
 ## Tools/Tech Used
 
 ![Java](https://skillicons.dev/icons?i=java,spring,mysql) 
+- Java ver. 17
+- Spring Boot ver. 2.7.16
+- MySQL ver. 8.0.34
 
 ## Installation Instructions
 
